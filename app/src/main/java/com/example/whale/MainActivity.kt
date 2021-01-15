@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_leader.*
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,11 +33,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun loginUserId2(email: String, password: String) {
+
+
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
+
                     Toast.makeText(this, "로그인이 되었습니다", Toast.LENGTH_SHORT).show()
                     val intent2 = Intent(this, FollowerActivity::class.java)
+                    intent2.putExtra("new", email)
 
                     startActivity(intent2)
                 } else {
@@ -56,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                     loginUserId1(btn_idforlogin.text.toString(), btn_pwforlogin.text.toString())
                 }
                 rbtn_follower.isChecked -> {
+
                     loginUserId2(btn_idforlogin.text.toString(), btn_pwforlogin.text.toString())
                 }
                 else -> {
@@ -64,4 +71,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }

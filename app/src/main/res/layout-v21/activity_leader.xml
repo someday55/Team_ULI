@@ -314,6 +314,7 @@
                                         android:layout_weight="1" />
 
                                     <TextView
+                                        android:id="@+id/QuestButTest"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -550,7 +551,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/followername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test2"
