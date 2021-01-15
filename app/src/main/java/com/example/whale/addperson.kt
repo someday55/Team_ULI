@@ -29,6 +29,10 @@ class addperson : AppCompatActivity() {
             startActivity(intent6)
 
         }
+
+
+
+
     }
     fun saveDataforfriend(){
         var leader = intent.getStringExtra("new2")

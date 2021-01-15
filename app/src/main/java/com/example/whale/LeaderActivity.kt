@@ -11,9 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_leader.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Integer.parseInt
 
 class LeaderActivity : AppCompatActivity() {
-
+    var a :Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leader)
@@ -31,32 +32,32 @@ btn_person.setOnClickListener{
         }
         queryObserveData()
         queryObserveDataforadd()
+
+
+
     }
 
     fun queryObserveDataforadd() {
         //val layout2 = findViewById<EditText>(R.id.btn_idforlogin).text.toString()
         //val weight =
-        if (intent.hasExtra("person")) {
+        var a : String
+        if (intent.hasExtra("new")) {
             FirebaseFirestore.getInstance()
                 .collection("leader")
-                .whereEqualTo("follower_name", intent.getStringExtra("person"))
+                .whereEqualTo("leader_email", intent.getStringExtra("new"))
                 .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
                     var map: Map<String, Any> =
                         querySnapshot?.documents?.first()?.data as Map<String, Any>
                     first_profile_name.text = map["follower_name"].toString()
-                } }
-        else {
-            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
-        }
-
-        if (intent.hasExtra("person")) {
-            FirebaseFirestore.getInstance()
-                .collection("users")
-                .whereEqualTo("nickname", intent.getStringExtra("person"))
-                .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
-                    var map: Map<String, Any> =
-                        querySnapshot?.documents?.first()?.data as Map<String, Any>
-                    QuestButTest.text = map["id"].toString()
+                    a = map["follower_name"].toString()
+                    FirebaseFirestore.getInstance()
+                        .collection("users")
+                        .whereEqualTo("nickname", a)
+                        .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
+                            var map: Map<String, Any> =
+                                querySnapshot?.documents?.first()?.data as Map<String, Any>
+                            QuestButTest.text = map["id"].toString()
+                        }
                 } }
         else {
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()

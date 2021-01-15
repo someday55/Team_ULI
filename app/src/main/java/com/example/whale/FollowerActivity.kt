@@ -19,7 +19,6 @@ class FollowerActivity : AppCompatActivity() {
         //val weight =
 
         if (intent.hasExtra("new")) {
-
         }  else {
             //Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
         }

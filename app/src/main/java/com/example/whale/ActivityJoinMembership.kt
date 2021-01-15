@@ -76,6 +76,8 @@ class ActivityJoinMembership : AppCompatActivity() {
         map["nickname"] = setEditTextString
         map["id"] = setidString
         map["pw"] = setpwString
+        map["n1"] = 0
+        map["n2"] = 0
         FirebaseFirestore.getInstance()
             .collection("users")
             .document()
