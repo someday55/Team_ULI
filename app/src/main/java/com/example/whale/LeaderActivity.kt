@@ -36,14 +36,14 @@ btn_person.setOnClickListener{
     fun queryObserveDataforadd() {
         //val layout2 = findViewById<EditText>(R.id.btn_idforlogin).text.toString()
         //val weight =
-        if (intent.hasExtra("new")) {
+        if (intent.hasExtra("person")) {
             FirebaseFirestore.getInstance()
-                .collection("users")
-                .whereEqualTo("id", intent.getStringExtra("new"))
+                .collection("leader")
+                .whereEqualTo("follower_name", intent.getStringExtra("person"))
                 .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
                     var map: Map<String, Any> =
                         querySnapshot?.documents?.first()?.data as Map<String, Any>
-                    first_profile_name.text = map["friend"].toString()
+                    first_profile_name.text = map["follower_name"].toString()
                 } }
         else {
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
@@ -68,10 +68,6 @@ btn_person.setOnClickListener{
         //val weight =
 
         if (intent.hasExtra("new")) {
-
-        }  else {
-            //Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
-        }
             FirebaseFirestore.getInstance()
                 .collection("users")
                 .whereEqualTo("id", intent.getStringExtra("new"))
@@ -80,19 +76,23 @@ btn_person.setOnClickListener{
                         querySnapshot?.documents?.first()?.data as Map<String, Any>
                     UserName.text = map["nickname"].toString()
                 }
-
-        if (intent.hasExtra("new")) {
-
         }  else {
             //Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
         }
-        FirebaseFirestore.getInstance()
-            .collection("users")
-            .whereEqualTo("id", intent.getStringExtra("new"))
-            .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
-                var map: Map<String, Any> =
-                    querySnapshot?.documents?.first()?.data as Map<String, Any>
-                username_1.text = map["nickname"].toString()
-            }
+
+
+        if (intent.hasExtra("new")) {
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .whereEqualTo("id", intent.getStringExtra("new"))
+                .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
+                    var map: Map<String, Any> =
+                        querySnapshot?.documents?.first()?.data as Map<String, Any>
+                    username_1.text = map["nickname"].toString()
+                }
+        }  else {
+            //Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

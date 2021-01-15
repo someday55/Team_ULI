@@ -24,6 +24,7 @@ class FollowerActivity : AppCompatActivity() {
             //Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
         }
         var a : String
+        var b : String
         FirebaseFirestore.getInstance()
             .collection("users")
             .whereEqualTo("id", intent.getStringExtra("new"))
@@ -34,12 +35,22 @@ class FollowerActivity : AppCompatActivity() {
                 a = map["nickname"].toString()
 
                 FirebaseFirestore.getInstance()
-                    .collection("users")
-                    .whereEqualTo("friend", a)
+                    .collection("leader")
+                    .whereEqualTo("follower_name", a)
                     .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
                         var map: Map<String, Any> =
                             querySnapshot?.documents?.first()?.data as Map<String, Any>
-                        txt_title_ptlist.text = map["nickname"].toString()
+                            b = map["leader_email"].toString()
+
+
+                        FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .whereEqualTo("id", b)
+                            .addSnapshotListener() { querySnapshot, firebaseFireStoreException ->
+                                var map: Map<String, Any> =
+                                    querySnapshot?.documents?.first()?.data as Map<String, Any>
+                                txt_title_ptlist.text = map["nickname"].toString()
+                            }
                     }
             }
 
