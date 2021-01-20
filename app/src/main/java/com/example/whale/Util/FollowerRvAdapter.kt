@@ -78,8 +78,17 @@ class FollowerRvAdapter(val context: Context, val questList: ArrayList<ThingsTod
                     search(App.follower_6[1])
                 }
             }
-            //if()
-            //questList1.remove()
+            val y : String
+            for(s in pointList1.indices)
+            {
+                if(holder.point1?.text.toString()== pointList1[s].toString()){
+                  pointList1.remove(s)
+                    questList1.removeAt(s)
+                }
+
+            }
+
+
             FirebaseFirestore.getInstance()
             .collection("users")
             .document(namefordelete)
@@ -89,6 +98,7 @@ class FollowerRvAdapter(val context: Context, val questList: ArrayList<ThingsTod
                 .collection("users")
                 .document(namefordelete)
                 .update("pointList",pointList1)
+
         var a = holder.point1?.text.toString()
         var b = holder.quest1?.text.toString()
 //            var point = 0
